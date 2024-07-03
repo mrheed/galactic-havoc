@@ -18,8 +18,8 @@ $.init = function () {
   $.ctxbg4 = $.cbg4.getContext('2d');
   $.ctxmg = $.cmg.getContext('2d');
   $.ctxfg = $.cfg.getContext('2d');
-  $.cw = $.cmg.width = $.cfg.width = window.innerWidth * 0.9;
-  $.ch = $.cmg.height = $.cfg.height = window.innerHeight * 0.9;
+  $.cw = $.cmg.width = $.cfg.width = window.innerWidth * 1;
+  $.ch = $.cmg.height = $.cfg.height = window.innerHeight * 1;
   $.wrap.style.width = $.wrapInner.style.width = $.cw + 'px';
   $.wrap.style.height = $.wrapInner.style.height = $.ch + 'px';
   $.wrap.style.marginLeft = (-$.cw / 2) - 10 + 'px';
