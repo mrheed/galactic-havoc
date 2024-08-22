@@ -37,14 +37,20 @@ $.init = function () {
 
   $.assets = {
     hero: new Image(),
-    enemy: new Image(),
+    enemy_0: new Image(),
+    enemy_1: new Image(),
+    enemy_2: new Image(),
+    enemy_3: new Image(),
     bullet: new Image(),
     explosion: new Image(),
     powerup: new Image(),
   }
 
   $.assets.hero.src = 'assets/hero.png';
-  $.assets.enemy.src = 'assets/monster.png';
+  $.assets.enemy_0.src = 'assets/enemies/Asteroid.png';
+  $.assets.enemy_1.src = 'assets/enemies/Eye.png';
+  $.assets.enemy_2.src = 'assets/enemies/Alien Head.png';
+  $.assets.enemy_3.src = 'assets/enemies/Brain Alien.png';
   // $.assets.bullet.src = 'assets/bullet.png';
   // $.assets.explosion.src = 'assets/explosion.png';
   // $.assets.powerup.src = 'assets/powerup.png';
@@ -198,38 +204,8 @@ $.reset = function () {
 Create Favicon
 ==============================================================================*/
 $.renderFavicon = function () {
-  var favicon = document.getElementById('favicon'),
-    favc = document.createElement('canvas'),
-    favctx = favc.getContext('2d'),
-    faviconGrid = [
-      [1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, 1, 1, 1, , 1, 1, 1, 1, 1, 1, , 1],
-      [1, , , , , , , , , , , , , , , , , , , , , , , 1],
-      [1, , , , , , , , , , , , , , , , , , , , , , , 1],
-      [1, , 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, , 0],
-      [1, , 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, , 0],
-      [1, , 1, 1, , , , , , 1, 1, , , 1, 1, , , 1, 1, , , , , 1],
-      [1, , 1, 1, , , , , , 1, 1, , , 1, 1, , , 1, 1, , , , , 1],
-      [1, , 1, 1, , , , , , 1, 1, , , 1, 1, , , 1, 1, 1, 1, 1, , 1],
-      [1, , 1, 1, , , , , , 1, 1, , , 1, 1, , , 1, 1, 1, 1, 1, , 1],
-      [1, , 1, 1, , , , , , 1, 1, , , 1, 1, , , , , , 1, 1, , 1],
-      [1, , 1, 1, , , , , , 1, 1, , , 1, 1, , , , , , 1, 1, , 1],
-      [, , 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, , 1],
-      [, , 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, 1, , , 1, 1, 1, 1, 1, , 1],
-      [1, , , , , , , , , , , , , , , , , , , , , , , 1],
-      [1, , , , , , , , , , , , , , , , , , , , , , , 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, , , 1, 1, 1, 1, , 1, 1, 1, 1, 1, 1, , 1],
-    ];
-  favc.width = favc.height = 16;
-  favctx.beginPath();
-  for (var y = 0; y < 16; y++) {
-    for (var x = 0; x < 16; x++) {
-      if (faviconGrid[y][x] === 1) {
-        favctx.rect(x, y, 1, 1);
-      }
-    }
-  }
-  favctx.fill();
-  favicon.href = favc.toDataURL();
+  var favicon = document.getElementById('favicon')
+  favicon.href = 'assets/Icon.png'
 };
 
 /*==============================================================================
@@ -468,7 +444,7 @@ $.renderInterface = function () {
     ctx: $.ctxmg,
     x: healthBar.x + healthBar.width + 40,
     y: 20,
-    text: 'PROGRESS',
+    text: 'PROGRESS LEVEL',
     hspacing: 1,
     vspacing: 1,
     halign: 'top',
@@ -553,7 +529,7 @@ $.renderInterface = function () {
     ctx: $.ctxmg,
     x: scoreText.ex + 40,
     y: 20,
-    text: 'BEST',
+    text: 'BEST SCORE',
     hspacing: 1,
     vspacing: 1,
     halign: 'top',
@@ -686,6 +662,7 @@ Events
 ==============================================================================*/
 $.mousemovecb = function (e) {
   e.preventDefault();
+  window.focus()
   $.mouse.ax = e.pageX;
   $.mouse.ay = e.pageY;
   $.mousescreen();
@@ -700,11 +677,13 @@ $.mousescreen = function () {
 
 $.mousedowncb = function (e) {
   e.preventDefault();
+  window.focus()
   $.mouse.down = 1;
 };
 
 $.mouseupcb = function (e) {
   e.preventDefault();
+  window.focus()
   $.mouse.down = 0;
 };
 
@@ -870,9 +849,9 @@ $.updateLevel = function () {
       $.level.current++;
       $.level.kills = 0;
       // no more level definitions, so take the last level and increase the spawn rate slightly
-      //for( var i = 0; i < $.level.distributionCount; i++ ) {
-      //$.level.distribution[ i ] = Math.max( 1, $.level.distribution[ i ] - 5 );
-      //}
+      for (var i = 0; i < $.level.distributionCount; i++) {
+        $.level.distribution[i] = Math.max(1, $.level.distribution[i] - 5);
+      }
     }
     $.levelDiffOffset = $.level.current + 1 - $.levelCount;
     $.levelPops.push(new $.LevelPop({
@@ -975,7 +954,7 @@ $.setState = function (state) {
       lockedWidth: 299,
       lockedHeight: 49,
       scale: 3,
-      title: 'PLAY',
+      title: 'MULAI',
       action: function () {
         $.reset();
         $.audio.play('levelup');
@@ -990,7 +969,7 @@ $.setState = function (state) {
       lockedWidth: 299,
       lockedHeight: 49,
       scale: 3,
-      title: 'GAME STATS',
+      title: 'STATISTIK',
       action: function () {
         $.setState('stats');
       }
@@ -1283,40 +1262,6 @@ $.setupStates = function () {
     $.ctxmg.fillStyle = gradient;
     $.ctxmg.fill();
 
-    $.ctxmg.beginPath();
-    var creditKeys = $.text({
-      ctx: $.ctxmg,
-      x: $.cw / 2 - 10,
-      y: creditsTitle.ey + 49,
-      text: 'DEVELOPED BY\nAUDIO PROCESSING\n IDEAS TAKEN FROM \n HTML5 CANVAS REFERENCE\n GAME MATH REFERENCE',
-      hspacing: 1,
-      vspacing: 17,
-      halign: 'right',
-      valign: 'top',
-      scale: 2,
-      snap: 1,
-      render: 1
-    });
-    $.ctxmg.fillStyle = 'hsla(0, 0%, 100%, 0.5)';
-    $.ctxmg.fill();
-
-    $.ctxmg.beginPath();
-    var creditValues = $.text({
-      ctx: $.ctxmg,
-      x: $.cw / 2 + 10,
-      y: creditsTitle.ey + 49,
-      text: ' RAJDEEP DAS\n AUSTINHALLOCK, CHANDLERPRALL\n ASTEROIDS, STAR SHOOTER \n CODEPEN, W3SCHOOL\n W3SCHOOL, CODEPEN\n JAVASCRIPT ANIMATION',
-      hspacing: 1,
-      vspacing: 17,
-      halign: 'left',
-      valign: 'top',
-      scale: 2,
-      snap: 1,
-      render: 1
-    });
-    $.ctxmg.fillStyle = '#fff';
-    $.ctxmg.fill();
-
     var i = $.buttons.length; while (i--) { $.buttons[i].render(i) }
     i = $.buttons.length; while (i--) { $.buttons[i].update(i) }
   };
@@ -1353,7 +1298,7 @@ $.setupStates = function () {
     $.ctxmg.restore();
     i = $.levelPops.length; while (i--) { $.levelPops[i].render(i) }
     $.renderInterface();
-    // $.renderMinimap();
+    $.renderMinimap();
 
     // handle gameover
     if ($.hero.life <= 0) {

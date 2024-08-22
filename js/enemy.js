@@ -137,7 +137,7 @@ $.Enemy.prototype.render = function (i) {
   if (this.inView) {
     $.ctxmg.save();
     $.ctxmg.filter = 'hue-rotate(' + this.hue + 'deg)';
-    $.ctxmg.drawImage($.assets.enemy, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+    $.ctxmg.drawImage($.assets[this.enemyAsset], this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
     $.ctxmg.restore();
 
     // var mod = $.enemyOffsetMod / 6;

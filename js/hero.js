@@ -114,8 +114,10 @@ $.Hero.prototype.update = function () {
           var spreadStep = 0;
         }
 
-        var gunX = this.x 
-        var gunY = this.y 
+        var gunX = this.x
+        var gunY = this.y
+        var gunX = this.x + Math.cos(this.direction) * (this.radius * 3 / 1.5);
+        var gunY = this.y + Math.sin(this.direction) * (this.radius * 3 / 1.5);
 
         for (var i = 0; i < this.weapon.count; i++) {
           $.bulletsFired++;
@@ -181,7 +183,7 @@ $.Hero.prototype.render = function () {
   if (this.life > 0) {
     if (this.takingDamage) {
       var fillStyle = 'hsla(0, 0%, ' + $.util.rand(0, 100) + '%, 1)';
-      $.ctxmg.fillStyle = 'hsla(0, 0%, ' + $.util.rand(0, 100) + '%, ' + $.util.rand(0.01, 0.15) + ')';
+      $.ctxmg.fillStyle = 'hsla(0, 0aaaaaa%, ' + $.util.rand(0, 100) + '%, ' + $.util.rand(0.01, 0.15) + ')';
       $.ctxmg.fillRect(-$.screen.x, -$.screen.y, $.cw, $.ch);
     } else if (this.weapon.fireFlag > 0) {
       this.weapon.fireFlag -= $.dt;
@@ -194,7 +196,7 @@ $.Hero.prototype.render = function () {
     $.ctxmg.save();
     $.ctxmg.translate(this.x, this.y);
     $.ctxmg.rotate(this.direction + Math.PI / 2);
-    $.ctxmg.drawImage(heroImage, -(this.radius * 3 / 2), 0, this.radius * 3, this.radius * 3);
+    $.ctxmg.drawImage(heroImage, -(this.radius * 3 / 2), -(this.radius * 3 / 2), this.radius * 3, this.radius * 3);
     $.ctxmg.restore();
   }
 };

@@ -91,6 +91,7 @@ $.definitions.enemies = [
 		radius: 15,
 		hue: 180,
 		lockBounds: 1,
+    enemyAsset: 'enemy_0',
 		setup: function() {
 			if( this.start == 'top' ){
 				this.direction = $.pi / 2;
@@ -119,6 +120,7 @@ $.definitions.enemies = [
 		radius: 15,
 		hue: 120,
 		lockBounds: 1,
+    enemyAsset: 'enemy_0',
 		setup: function() {
 			var rand = Math.floor( $.util.rand( 0, 2 ) );
 			if( this.start == 'top' ){				
@@ -147,6 +149,7 @@ $.definitions.enemies = [
 		life: 2,
 		radius: 20,
 		hue: 330,
+    enemyAsset: 'enemy_0',
 		behavior: function() {
 			var speed = this.speed;
 			if( $.slow ) {
@@ -167,6 +170,7 @@ $.definitions.enemies = [
 		radius: 50,
 		hue: 210,
 		canSpawn: 1,
+    enemyAsset: 'enemy_1',
 		behavior: function() {
 			var speed = this.speed;
 			if( $.slow ) {
@@ -211,6 +215,7 @@ $.definitions.enemies = [
 		radius: 20,
 		hue: 30,
 		lockBounds: 1,
+    enemyAsset: 'enemy_1',
 		setup: function() {
 			if( this.start == 'top' ){
 				this.direction = $.pi / 2;
@@ -241,6 +246,7 @@ $.definitions.enemies = [
 		hue: 0,
 		saturation: 0,
 		lightness: 30,
+    enemyAsset: 'enemy_3',
 		behavior: function() {
 			var speed = this.speed;
 			if( $.slow ) {
@@ -260,6 +266,7 @@ $.definitions.enemies = [
 		life: 8,
 		radius: 80,
 		hue: 150,
+    enemyAsset: 'enemy_3',
 		behavior: function() {
 			var speed = this.speed;
 			if( $.slow ) {
@@ -279,6 +286,7 @@ $.definitions.enemies = [
 		life: 1,
 		radius: 15,
 		hue: 300,
+    enemyAsset: 'enemy_3',
 		behavior: function() {
 			var speed = this.speed;
 			if( $.slow ) {
@@ -302,6 +310,7 @@ $.definitions.enemies = [
 		hue: 0,
 		saturation: 0,
 		lightness: 100,
+    enemyAsset: 'enemy_3',
 		behavior: function() {
 			var speed = this.speed,
 				growth = this.growth;
@@ -337,6 +346,7 @@ $.definitions.enemies = [
 		life: 2,
 		radius: 20,
 		hue: 60,
+    enemyAsset: 'enemy_3',
 		setup: function() {
 			var dx = this.x - $.hero.x,
 				dy = this.y - $.hero.y;
@@ -370,6 +380,7 @@ $.definitions.enemies = [
 		canSpawn: 1,
 		spawnTick: 0,
 		spawnMax: 250,
+    enemyAsset: 'enemy_0',
 		behavior: function() {
 			var speed = this.speed;
 			if( $.slow ) {
@@ -407,6 +418,7 @@ $.definitions.enemies = [
 		life: 10,
 		radius: 30,
 		hue: 90,		
+    enemyAsset: 'enemy_2',
 		setup: function(){
 			this.xTarget = $.util.rand( 50, $.ww - 50 );
 			this.yTarget = $.util.rand( 50, $.wh - 50 );
@@ -435,6 +447,7 @@ $.definitions.enemies = [
 		radius: 5,
 		hue: 0,
 		lockBounds: 1,
+    enemyAsset: 'enemy_2',
 		setup: function() {
 			this.radius = $.util.rand( 15, 35 );
 			this.speed = $.util.rand( 3, 8 );
